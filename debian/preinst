@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#DEBHELPER#
+
+# preinst script for nfs-common-modified-init
+
+#set -e
+
+case "$1" in
+  install|upgrade) dpkg-divert --quiet                                               \
+                            --add                                              \
+                            --package nfs-common-modified-init              \
+                            --rename       \
+                            --divert /etc/init.d/nfs-kernel-server.dpkg-distrib \
+                            /etc/init.d/nfs-kernel-server
+                ;;
+
+                *) :
+                   ;;
+esac 
+
+exit 0

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#DEBHELPER#
+
+# postrm script for nfs-common-modified-init
+
+#set -e
+
+case "$1" in
+  purge|remove) dpkg-divert --quiet                                               \
+                            --remove                                              \
+                            --package nfs-common-modified-init              \
+                            --rename       \
+                            --divert /etc/init.d/nfs-kernel-server.dpkg-distrib \
+                            /etc/init.d/nfs-kernel-server
+                ;;
+
+             *) :
+                ;;
+esac 
+
+exit 0
